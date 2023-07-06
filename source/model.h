@@ -72,4 +72,12 @@ public:
 
 	//For display of node contents.
 	virtual void print() const = 0;
+
+protected:
+	friend class Model;
+
+	Model& model_;
+	std::string name_;
+	std::vector<Node*> antecedents_;
+	std::vector<Node*> subsequents_;
 };
