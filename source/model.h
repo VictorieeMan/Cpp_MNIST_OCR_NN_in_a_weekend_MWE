@@ -81,3 +81,46 @@ protected:
 	std::vector<Node*> antecedents_;
 	std::vector<Node*> subsequents_;
 };
+
+// Optimizer class
+class Optimizer {
+public:
+	virtual void train(Node& node) = 0;
+};
+
+// Model class
+class Model {
+public:
+	Model(std::string name);
+
+	template <typename Node_t, typename... T>
+	Node_t& add_node(T&&... args) {
+		nodes_.emplace_back(
+			std::make_unique<Node_t>(*this, std::forward<T>(args));
+		return reinterpret_cast<Node_t& (*nodes_.back());
+	}
+
+	void create_edge(Node& dst, Node& src);
+
+	//Initialize the model parameters with provided seed,
+	//if seed is 0, use a random seed.
+	rne_t::result_type init(rne_t::result_type seed = 0);
+
+	void train(Optimizer& optimizer);
+
+	[[nodiscard]] std::string const& name() const noexcept {
+		return name_;
+	}
+
+	void print() const;
+
+	//Save and load the model to/from a file.
+	void save(std::ofstream& out);
+	void load(std::ifstream& in);
+
+private:
+	friend class Node;
+	
+	std::string name_;
+	std::vector<std::unique_ptr<Node>> nodes_;
+};
