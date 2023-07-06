@@ -11,7 +11,7 @@ This journal.md is for documenting some thoughts, milestones and decisions that 
 #### 1.2: Starting the project
 Following the [C++ Neural Netwoek in a Weekend](https://raw.githubusercontent.com/jeremyong/cpp_nn_in_a_weekend/master/doc/DOC.pdf) by [Jeremy Ong](https://github.com/jeremyong) as a guide. My idea is to start by building the program step by step, and then try on some of the extra challenges stated in the end of the guide. See if I can improve the performance by programming a convolutional neural netowrk layer for instance.
 
-#### 1.3: The Computational Graph
+#### 1.3: The Computational Graph and comments
 The neural network is a computational graph. I really liek that phrasing, because it's both true and very clear in its meaning. For this project we are building a sequential model, but with the fact in mind that a NN model is a graph, we can easily see how we can expand the model to be more complex.
 
 I have decided to add some extra informational comments within the code wherever I learn something new, or feel it's good to take an extra note of why something is added. A contextual why! These comments I will mark in a new paragraph using this comment notation /* */. My regular progammer comments will still be in the // style.
