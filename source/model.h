@@ -1,6 +1,11 @@
 #pragma once
 
+#include <cstdint>
+#include <fstream>
+#include <memory>
 #include <random>
+#include <string>
+#include <vector>
 
 // Declaring type aliases
 using num_t = float;		//Default precsision, single 32-bit
