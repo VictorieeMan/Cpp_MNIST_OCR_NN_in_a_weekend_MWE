@@ -12,4 +12,4 @@ endif()
 project ("my_first_cpp_NN_experiment")
 
 # Include sub-projects.
-add_subdirectory ("my_first_cpp_NN_experiment")
+add_subdirectory ("source")
