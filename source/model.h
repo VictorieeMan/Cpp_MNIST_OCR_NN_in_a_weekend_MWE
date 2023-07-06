@@ -123,4 +123,8 @@ private:
 	
 	std::string name_;
 	std::vector<std::unique_ptr<Node>> nodes_;
+	/*std::unique_ptr is useful for managing objects with dynamic lifetimes, 
+	such as objects allocated on the heap with new. It can help prevent memory 
+	leaks and make your code safer and easier to read by automatically managing 
+	the lifetime of the object.*/
 };
