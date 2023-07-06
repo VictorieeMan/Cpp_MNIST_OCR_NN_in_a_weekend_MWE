@@ -1,7 +1,8 @@
-﻿// my_first_cpp_NN_experiment.cpp : Defines the entry point for the application.
+﻿// main.cpp : Defines the entry point for the application.
 //
 
-#include "my_first_cpp_NN_experiment.h"
+#include <iostream>
+#include <vector>
 
 //using namespace std;
 
