@@ -3,7 +3,11 @@
 #
 
 # Add source to this project's executable.
-add_executable (my_first_cpp_NN_experiment "my_first_cpp_NN_experiment.cpp" "my_first_cpp_NN_experiment.h")
+file(GLOB_RECURSE CPP_FILES "*.cpp")
+file(GLOB_RECURSE H_FILES "*.h")
+set(SOURCE_FILES ${CPP_FILES} ${H_FILES})
+add_executable(my_executable ${SOURCE_FILES})
+
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET my_first_cpp_NN_experiment PROPERTY CXX_STANDARD 20)
