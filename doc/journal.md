@@ -13,3 +13,5 @@ Following the [C++ Neural Netwoek in a Weekend](https://raw.githubusercontent.co
 
 #### 1.3: The Computational Graph
 The neural network is a computational graph. I really liek that phrasing, because it's both true and very clear in its meaning. For this project we are building a sequential model, but with the fact in mind that a NN model is a graph, we can easily see how we can expand the model to be more complex.
+
+I have decided to add some extra informational comments within the code wherever I learn something new, or feel it's good to take an extra note of why something is added. A contextual why! These comments I will mark in a new paragraph using this comment notation /* */. My regular progammer comments will still be in the // style.
