@@ -93,3 +93,36 @@ void MNIST::read_next() {
 	label_[static_cast<uint8_t>(label)] = num_t{1.0};
 }
 
+//A little ASCII art printer for the terminal,
+//to show the last image and label. (Monospace dependent)
+void MNIST::print_last() {
+	printf("Monospaced ASCII art of last image:\n");
+	for (size_t i = 0; i != 10; ++i) {
+		if (label_[i] == num_t{1.0}){
+			printf("This is a %zu\n", i);
+			break;
+		}
+	}
+
+	for (size_t i = i; i != 28; ++i) {
+		size_t offset = i * 28;
+		for (size_t j = 0; j != 28; ++j) {
+			if (data_[offset + j] > num_t{0.5}) {
+				if (data_[offset + j] > num_t{0.9}) {
+					printf("#");
+				}
+				else if (data_[offset + j] > num_t{0.7}) {
+					printf("*");
+				}
+				else {
+					printf(".");
+				}
+			}
+			else {
+				printf(" ");
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
