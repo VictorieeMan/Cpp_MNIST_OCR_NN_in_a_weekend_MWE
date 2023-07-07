@@ -26,9 +26,24 @@ MNIST::MNIST(Model& model, std::ifstream& images, std::ifstream& labels)
 	uint32_t image_magic;
 	read_be(images, &image_magic);
 	if (image_magic != 2051) {
-		throw std::runtime_error{"Image file is malformed"};
+		throw std::runtime_error{"Images file is malformed"};
 	}
-	
+	read_be(images, &image_count_);
 
+	uint32_t labels_magic;
+	read_be(labels, &labels_magic);
+	if (labels_magic != 2049) {
+		throw std::runtime_error{"Labels file appears to be malformed"};
+	}
+	/*Exception checks dependent on specific knowledge of the MNIST data set.*/
+
+	uint32_t label_count;
+	read_be(labels, &label_count);
+	if (label_count != image_count_) {
+		throw std::runtime_error{
+			"Label count does not match image count."
+		};
+	}
+	/*The number of labels and images must be the same.*/
 
 }
