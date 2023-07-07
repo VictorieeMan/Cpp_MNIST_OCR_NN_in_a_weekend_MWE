@@ -17,6 +17,10 @@ between pointer types. It’s typically used in situations where you need to
 treat a block of memory as if it were a different type, or when you need to
 perform a type conversion that would otherwise be disallowed by the compiler.*/
 
+
+//Constructs the MNIST input node;
+//Loads the MNIST data from the files.
+//And checks for well formatted MNIST data.
 MNIST::MNIST(Model& model, std::ifstream& images, std::ifstream& labels)
 	: Node{ model, "MNIST input" }
 	, images_{ images }
@@ -46,4 +50,15 @@ MNIST::MNIST(Model& model, std::ifstream& images, std::ifstream& labels)
 	}
 	/*The number of labels and images must be the same.*/
 
+	uint32_t rows;
+	uint32_t columns;
+	read_be(images, &rows);
+	read_be(images, &columns);
+	if (rows != 28 || columns != 28) {
+		throw std::runtime_error{
+			"Images are not 28x28 pixels in size, as expected."
+		};
+	}
+
+	printf("Successfully loaded %u images.\n", image_count_);
 }
