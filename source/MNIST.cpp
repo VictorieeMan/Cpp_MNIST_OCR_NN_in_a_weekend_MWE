@@ -76,9 +76,20 @@ void MNIST::print() const {
 	//Due to being an input node.
 }
 
+//Reads the next image and label from the file buffer.
 void MNIST::read_next() {
 	images_.read(buf_, DIM);
-	num_t inv = num_t{1.0} / num_t{255.0};
-	for(size_t i = 0; i < DIM; ++i) {
-		data_[i] = num_t{buf_[i]} * inv;
+	num_t inv = num_t{ 1.0 } / num_t{255.0};
+	for (size_t i = 0; i < DIM; ++i) {
+		data_[i] = num_t{ buf_[i] } *inv;
 	}
+
+	char label;
+	labels_.read(&label, 1);
+
+	for (size_t i = 0; i < 10; ++i) {
+		label_[i] = num_t{0.0};
+	}
+	label_[static_cast<uint8_t>(label)] = num_t{1.0};
+}
+
