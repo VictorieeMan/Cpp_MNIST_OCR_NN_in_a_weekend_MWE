@@ -1,4 +1,4 @@
-//#pragma once
+#pragma once
 
 #include "model.h"
 #include <fstream>
@@ -9,7 +9,7 @@ public:
 	constexpr static size_t DIM = 28 * 28;
 
 	//Data input, of images and labels.
-	MNIST(Model& model, std::ifstream images, std::ifstream& labels);
+	MNIST(Model& model, std::ifstream& images, std::ifstream& labels);
 
 	void init(rne_t&) override{}
 
