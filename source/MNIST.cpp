@@ -63,7 +63,7 @@ MNIST::MNIST(Model& model, std::ifstream& images, std::ifstream& labels)
 	printf("Successfully loaded %u images.\n", image_count_);
 }
 
-//Reads the next image and label into memory.
+
 void MNIST::forward(num_t* data) {
 	read_next();
 	for (Node* node : subsequents_) {
@@ -78,5 +78,7 @@ void MNIST::print() const {
 
 void MNIST::read_next() {
 	images_.read(buf_, DIM);
-
-}
+	num_t inv = num_t{1.0} / num_t{255.0};
+	for(size_t i = 0; i < DIM; ++i) {
+		data_[i] = num_t{buf_[i]} * inv;
+	}
