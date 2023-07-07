@@ -27,3 +27,6 @@ D --Label query.-> A
 ```
 Computational nodes can be read as layers as well, I think that lingo is comparable.
 
+### 2: 2023-07-07
+#### 2.1: Finishing up the MNIST input node
+Now the MNIST input node is finished, the declaration of the class is in the MNIST.h and the constructors of it's functions in the MNIST.cpp file. The Node is now specialized for delaing with the MNISt data set, reading it to memory and forwarding it to the next node. It also includes a little ASCII art generator, to give a little visual feedback (if called) of what is happening in the program.
