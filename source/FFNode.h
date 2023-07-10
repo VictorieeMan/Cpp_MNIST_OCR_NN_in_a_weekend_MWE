@@ -58,4 +58,18 @@ private:
 	std::vector<num_t> actications_;
 
 	/*Loss Gradients*/
+	std::vector<num_t> activation_gradients_;
+
+	//During training, parameter loss gradients are accumulated in these vectors
+	std::vector<num_t> weight_gradients_;
+	std::vector<num_t> bias_gradients_;
+
+	//This buffer is used to store temporary gradients used
+	//in a single backward pass. Note that this does not accumulate like
+	//the weight and bias gradients.
+	std::vector<num_t> input_gradients_;
+
+	//The last input is needed to compute the loss gradients with
+	//respect to the weights, during backpropagation.
+	num_t* last_input_;
 };
