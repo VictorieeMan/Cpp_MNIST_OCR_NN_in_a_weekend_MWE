@@ -38,9 +38,24 @@ public:
 		return (input_size_ + 1) * output_size_;
 	}
 
+	//Functions from model.h
+	num_t* param(size_t index);
+	num_t* gradients(size_t index);
+
+	void print() const override;
+
 private:
 	Activation activation_;
 	uint16_t output_size_;
 	uint16_t input_size_;
 
+	/*Node Parameters*/
+	//weights_.size() := output_size_ * input_size_
+	std::vector<num_t> weights_;
+	//biases_.size() := output_size_
+	std::vector<num_t> biases_;
+	//activations_.size() := output_size_
+	std::vector<num_t> actications_;
+
+	/*Loss Gradients*/
 };
