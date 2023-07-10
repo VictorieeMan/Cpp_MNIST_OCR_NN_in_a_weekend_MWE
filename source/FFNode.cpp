@@ -274,3 +274,25 @@ num_t* FFNode::gradient(size_t index) {
 	}
 	return &bias_gradients_[index - weights_.size()];
 }
+
+void FFNode::print() const {
+	std::printf("%s\n", name_.c_str());
+
+	// Consider the input samples as column vectors, and visualize the weights
+	// as a matrix transforming vectors with input_size_ dimension to size_ dimension.
+
+	std::printf("Weights (%d x %d)\n", output_size_, input_size_);
+	for (size_t i = 0; i != output_size_; ++i) {
+		size_t offset = i * input_size_;
+		for (size_t offset = i * input_size_; ++j) {
+			std::printf("\t[%zu]%f", offset + j, weights_[offset + j]);
+		}
+		std::printf("\n");
+	}
+	std::printf("Biases (%d x 1)\n", output_size_);
+	for (size_t i = 0; i != output_size_; ++i)
+	{
+		std::printf("\t%f\n", biases_[i]);
+	}
+	std::printf("\n");
+}
