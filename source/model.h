@@ -13,7 +13,7 @@ using rne_t = std::mt19937; //Random number engine, for double 64-bit use std::m
 
 
 enum class Activation {
-	ReLu,
+	ReLU,
 	Softmax
 };
 /*Enumerations are often used to represent a fixed set of related values in a 
