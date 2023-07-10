@@ -37,5 +37,23 @@ FFNode::FFNode(
 }
 
 void FFNode::init(rne_t& rne) {
+	num_t sigma;
+	switch (activation_) {
+	case Activation::ReLU:
+		//Kaiming He, et. al. weight initialization for ReLU networks
+		// https://arxiv.org/pdf/1502.01852.pdf
+		//
+		// Suggests using a normal distribution with variance := 2 / n_in
+		sigma = std::sqrt(2.0 / static_cast<num_t>(input_size_));
+		break;
+	case Activation::Softmax:
+	default:
+		sigma = std::sqrt(1.0 / static_cast<num_t>(input_size_));
+	}
 
+	// NOTE: The C++ standard doesn't guarantee that std::normal_distribution,
+	// is consistent across compilers & devices. For production ML code,
+	// you should use a library that provides a consistent implementation.
+	// Or make a custom implementation, that is deterministic.
+	auto dist = std::normal_distribution<num_t>{ 0.0, sigma };
 }
