@@ -40,7 +40,7 @@ public:
 
 	//Functions from model.h
 	num_t* param(size_t index);
-	num_t* gradients(size_t index);
+	num_t* gradient(size_t index);
 
 	void print() const override;
 
