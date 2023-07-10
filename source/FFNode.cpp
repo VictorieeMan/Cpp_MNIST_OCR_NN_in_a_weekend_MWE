@@ -198,7 +198,15 @@ void FFNode::reverse(num_t* gradients) {
 	for (size_t i = 0; i != output_size_; ++i) {
 		// Next, let's compute the partial dJ/db_i. If we hold all the weights
 		// and inputs constant, it's clear that dz/db_i is just 1 (consider
-		// differentiating the line mx + b with respect to b). Thus, dJ/db_i =
-		// dJ/dg(z_i) * dg(z_i)/dz_i.
+		// differentiating the line mx + b with respect to b).
+		// Thus, dJ/db_i = dJ/dg(z_i) * dg(z_i)/dz_i.
+
+		bias_gradients_[i] += activation_gradients_[i];
 	}
+
+	// CAREFUL! Unlike the other gradients, we reset input gradients to 0. These
+	// values are used primarily as a subexpression in computing upstream
+	// gradients and do not participate in the network optimization step (aka
+	// Stochastic Gradient Descent) later.
+	std::fill(input_gradients_.begin(), input_gradients_.end(), num_t{ 0.0 });
 }
