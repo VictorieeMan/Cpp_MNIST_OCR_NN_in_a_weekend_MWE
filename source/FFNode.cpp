@@ -209,4 +209,38 @@ void FFNode::reverse(num_t* gradients) {
 	// gradients and do not participate in the network optimization step (aka
 	// Stochastic Gradient Descent) later.
 	std::fill(input_gradients_.begin(), input_gradients_.end(), num_t{ 0.0 });
+
+	// To compute dz/dI_i, recall that z_i = \sum_i W_i*I_i + B_i. That is, the
+	// precursor to each activation is a dot-product between a weight vector an
+	// the input plus a bias. Thus, dz/dI_i must be the sum of all weights that
+	// were scaled by I_i during the forward pass.
+	for (size_t i = 0; i != output_size_; ++i) {
+		size_t offset = i * input_size_;
+		for (size_t j = 0; j != input_size_; ++j) {
+			input_gradients_[j] += weights_[offset + j] * activation_gradients_[i];
+		}
+	}
+
+	for (size_t i = 0; i != input_size_; ++i) {
+		for (size_t j = 0; j != output_size_; ++j) {
+			// Each individual weight shows up in the equation for z once and is
+			// scaled by the corresponding input.
+			// Thus, dJ/dw_i = dJ/dg(z_i) *´dg(z_i)/dz_i * dz_i/d_w_ij where the
+			// last factor is equal to the input scaled by w_ij.
+			weight_gradients_[j * input_size_ + i] += last_input_[i] * activation_gradients_[j];
+		}
+	}
+
+	for (Node* node : antecedents_) {
+		// Forward loss gradients with respect to the inputs to the previous node.
+		//
+		// F.T.R. Technically, if the antecedent node has no learnable
+		// parameters, there is no point forwarding gradients to that node.
+		// Furthermore, if no antecedent nodes required any gradients, we could
+		// have skipped computing the gradients for this node altogether. A
+		// simple way to implement this is to add a `parameter_count` virtual
+		// method on the Node interface leverage it to save some work whenever
+		// possible here.
+		node->reverse(input_gradients_.data());
+	}
 }
