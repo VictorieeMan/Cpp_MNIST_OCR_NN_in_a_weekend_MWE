@@ -16,7 +16,7 @@ public:
 		std::string name,
 		Activation activation,
 		uint16_t output_sixe,
-		uint16_t input_size,
+		uint16_t input_size
 		);
 
 	// Initialize the parameters of the layer
