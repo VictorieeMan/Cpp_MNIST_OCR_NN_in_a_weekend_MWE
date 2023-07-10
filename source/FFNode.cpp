@@ -75,3 +75,48 @@ void FFNode::init(rne_t& rne) {
 		b = 0.01;
 	}
 }
+
+void FFNode::forward(num_t* inputs) {
+	//Remember the last input data for backpropogation later.
+	last_input_ = inputs;
+
+	for (size_t i = 0; i != output_size_; ++i) {
+		//For each output vector, sompute the dot product of the input vector,
+		//use weight vector to add the bias.
+
+		num_t z{0.0};
+		size_t offset = i * input_size_;
+
+		for (size_t j = 0; j != input_size_; ++j) {
+			z += weights_[offset + j] * inputs[j];
+		}
+		//Add neuron bias
+		z += biases_[i];
+
+		switch (activation_) {
+		case Activation::ReLU:
+			activations_[i] = std::max(z, num_t{ 0.0 });
+			break;
+		case Activation::Softmax:
+		default:
+			activations_[i] = std::exp(z);
+			break;
+		}
+	}
+
+	if (activation_ == Activation::Softmax) {
+		//Softmax(z)_i = exp(z_i) / sum_j(exp(z_j))
+		num_t sum_exp_z{ 0.0 };
+		for (size_t i = 0; i != output_size_; ++i) {
+			// NOTE: with exploding gradients, it is quite easy for this
+			// exponential function to overflow, which will result in NaNs
+			// infecting the network.
+			sum_exp_z += activations_[i];
+		}
+	}
+
+	//Forward activation data to all subsequent nodes in the computational graph.
+	for(Node* subsequent : subsequents_){
+		subsequent->forward(activations_.data());
+	}
+}
