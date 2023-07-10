@@ -55,7 +55,7 @@ private:
 	//biases_.size() := output_size_
 	std::vector<num_t> biases_;
 	//activations_.size() := output_size_
-	std::vector<num_t> actications_;
+	std::vector<num_t> activations_;
 
 	/*Loss Gradients*/
 	std::vector<num_t> activation_gradients_;
