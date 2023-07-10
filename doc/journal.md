@@ -30,3 +30,8 @@ Computational nodes can be read as layers as well, I think that lingo is compara
 ### 2: 2023-07-07
 #### 2.1: Finishing up the MNIST input node
 Now the MNIST input node is finished, the declaration of the class is in the MNIST.h and the constructors of it's functions in the MNIST.cpp file. The Node is now specialized for delaing with the MNISt data set, reading it to memory and forwarding it to the next node. It also includes a little ASCII art generator, to give a little visual feedback (if called) of what is happening in the program.
+
+## Week 28
+### 3: 2023-07-10
+#### 3.1: Added the FFNode
+Just finished adding the FFNode.h and \*.cpp, which is the feed forward node. This node is the one that will be used for the hidden and output layers. It is a fully connected layer, and it's forward pass is a matrix multiplication. See the code for more details and comments.
