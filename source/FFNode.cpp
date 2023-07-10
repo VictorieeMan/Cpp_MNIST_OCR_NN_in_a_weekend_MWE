@@ -244,3 +244,33 @@ void FFNode::reverse(num_t* gradients) {
 		node->reverse(input_gradients_.data());
 	}
 }
+
+// F.T.R. It is more efficient to store parameters contiguously so they can be
+// accessed without branching or arithmetic.
+/*“Contiguously” means that elements are stored next to each other in memory, 
+without any gaps or interruptions. When data is stored contiguously, it can be 
+accessed more efficiently because the processor can read or write multiple 
+elements at once, without having to jump around in memory.
+
+For example, in C++, arrays and std::vector store their elements contiguously 
+in memory. This means that if you have an array or a std::vector of ints, the 
+int values are stored next to each other in memory, one after the other. This 
+allows for fast access to the elements of the array or std::vector, because the 
+processor can read or write multiple elements at once.
+
+On the other hand, data structures like linked lists 
+do not store their elements contiguously.*/
+
+num_t* FFNode::param(size_t index) {
+	if (index < weights_.size()) {
+		return &weights_[index];
+	}
+	return &biases_[index - weights_.size()];
+}
+
+num_t* FFNode::gradient(size_t index) {
+	if (index < weights_.size()) {
+		return &weight_gradients_[index];
+	}
+	return &bias_gradients_[index - weights_.size()];
+}
