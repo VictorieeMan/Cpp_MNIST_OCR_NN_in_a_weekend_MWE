@@ -120,3 +120,85 @@ void FFNode::forward(num_t* inputs) {
 		subsequent->forward(activations_.data());
 	}
 }
+
+void FFNode::reverse(num_t* gradients) {
+	// We receive a vector of output_size_ gradients of the loss function with
+	// respect to the activations of this node.
+
+	// We need to compute the gradients of the loss function with respect to
+	// each parameter in the node (all weights and biases). In addition, we need
+	// to compute the gradients with respect to the inputs in order to propagate
+	// the gradients further.
+
+	// Notation:
+	//
+	// Subscripts on any of the following vector and matrix quantities are used
+	// to specify a specific element of the vector or matrix.
+	//
+	//   - I is the input vector
+	//   - W is the weight matrix
+	//   - B is the bias vector
+	//   - Z = W*I + B
+	//   - A is our activation function (ReLU or Softmax in this case)
+	//   - L is the total loss (cost)
+	//
+	// The gradient we receive from the subsequent is dJ/dg(Z) which we can use
+	// to compute dJ/dW_{i, j}, dJ/dB_i, and dJ/dI_i
+
+	// First, we compute dJ/dz as dJ/dg(z) * dg(z)/dz and store it in our
+	// activations array
+	// https://github.com/VictorieeMan/fork_cpp_nn_in_a_weekend/blob/152e8cbd361161d8b526c021ef9818ea9dbfe034/src/FFNode.cpp#L142C1-L166C25
+
+	for (size_t i = 0; i != output_size_; ++i) {
+		//dg(z)/dz = 1
+		num_t activation_grad{0.0};
+		switch (activation_) {
+		case Activation::ReLU:
+			// For a ReLU function, the gradient is unity when the activation
+			// exceeds 0.0, and 0.0 otherwise. Technically, the gradient is
+			// undefined at 0, but in practice, defining the gradient at this
+			// point to be 0 isn't an issue
+			if (activations_[i] > num_t{0.0}) {
+				activation_grad = num_t{ 1.0 };
+			}
+			else {
+				activation_grad = num_t{ 0.0 };
+			}
+			// dJ/dz = dJ/dg(z) * dg(z)/dz
+			activation_gradients_[i] = gradients[i] * activation_grad;
+			break;
+		case Activation::Softmax:
+		default:
+			// F.T.R. The implementation here correctly computes gradients for
+			// the general softmax function accounting for all received
+			// gradients. However, this step can be optimized significantly if
+			// it is known that the softmax output is being compared to a
+			// one-hot distribution. The softmax output of a given unit is
+			// exp(z_i) / \sum_j exp(z_j). When the loss gradient with respect
+			// to the softmax outputs is returned, a single i is selected from
+			// among the softmax outputs in a 1-hot encoding, corresponding to
+			// the correct classification for this training sample. Complete the
+			// derivation for the gradient of the softmax assuming a one-hot
+			// distribution and implement the optimized routine.
+
+			for (size_t j = 0; j != output_size_; ++j) {
+				if (i == j) {
+					activation_grad += activations_[i] * (num_t{ 1.0 } - activations_[i]) * gradients[j];
+				}
+				else {
+					activation_grad += -activations_[i] * activations_[j] * gradients[j];
+				}
+			}
+
+			activation_gradients_[i] = activation_grad;
+			break;
+		}
+	}
+
+	for (size_t i = 0; i != output_size_; ++i) {
+		// Next, let's compute the partial dJ/db_i. If we hold all the weights
+		// and inputs constant, it's clear that dz/db_i is just 1 (consider
+		// differentiating the line mx + b with respect to b). Thus, dJ/db_i =
+		// dJ/dg(z_i) * dg(z_i)/dz_i.
+	}
+}
