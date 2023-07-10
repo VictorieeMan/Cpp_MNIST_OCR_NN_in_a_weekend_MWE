@@ -56,4 +56,22 @@ void FFNode::init(rne_t& rne) {
 	// you should use a library that provides a consistent implementation.
 	// Or make a custom implementation, that is deterministic.
 	auto dist = std::normal_distribution<num_t>{ 0.0, sigma };
+
+	for (num_t& w : weights_) {
+		w = dist(rne);
+	}
+	/*Remember from the model.h file, that rne_t alias is conected to a random
+	nnumber generator algorithm. Hence rne are random numbers.*/
+
+	// NOTE: Setting biases to zero is a common practice, as is initializing the
+	// bias to a small value (e.g. on the order of 0.01). It is unclear if the
+	// latter produces a consistent result over the former, but the thinking is
+	// that a non-zero bias will ensure that the neuron always "fires" at the
+	// beginning to produce a signal.
+	//
+	// Here, we initialize all biases to a small number, but the reader should
+	// consider experimenting with other approaches.
+	for (num_t& b : biases_) {
+		b = 0.01;
+	}
 }
