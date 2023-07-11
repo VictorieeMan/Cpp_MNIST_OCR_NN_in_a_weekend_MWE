@@ -94,3 +94,7 @@ num_t CCELossNode::accuracy() const {
 	return static_cast<num_t>(correct_)
 		/ static_cast<num_t>(correct_ + incorrect_);
 }
+
+num_t CCELossNode::avg_loss() const {
+	return cumulative_loss_ / static_cast<num_t>(correct_ + incorrect_);
+}
