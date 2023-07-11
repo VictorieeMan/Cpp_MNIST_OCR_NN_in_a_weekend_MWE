@@ -23,7 +23,7 @@ public:
 	//As a loss node, we ignore the arguments to this method
 	//(THe gradient of the loss with respect to itself is unity)
 
-	void reverse(num_t* gradients) override;
+	void reverse(num_t* gradients = nullptr) override;
 
 	void print() const override;
 
