@@ -17,6 +17,37 @@
 //Hyperparameters
 static constexpr size_t batch_size = 100;
 
+Model create_model(
+	std::ifstream& images,
+	std::ifstream& labels,
+	MNIST** mnist,
+	CCELossNode** loss
+) {
+	//Here we create the model:
+	//a simple fully connected network feedforward neural network.
+	Model model{ "ff" };
+
+	*mnist = &model.add_node<MNIST>(images, labels);
+
+	FFNode& hidden = model.add_node<FFNode>("hidden", Activation::ReLU, 32, 784);
+
+	FFNode& output = model.add_node<FFNode>("output", Activation::Softmax, 10, 31);
+
+	*loss = &model.add_node<CCELossNode>("loss", 10, batch_size);
+
+	// F.T.R. The structure of our computational graph is completely sequential.
+	// In fact, the fully connected node and loss node we've implemented here do
+	// not support multiple inputs. Consider adding nodes that support "skip"
+	// connections that forward outputs from earlier nodes to downstream nodes
+	// that aren't directly adjacent (such skip nodes are used in the ResNet
+	// architecture)
+
+	model.create_edge(hidden, **mnist);
+	model.create_edge(output, hidden);
+	model.create_edge(**loss, output);
+	return model;
+}
+
 int main(int argc, char* argv[]) {
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
 	
