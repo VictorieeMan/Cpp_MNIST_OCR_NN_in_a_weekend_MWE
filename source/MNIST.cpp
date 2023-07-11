@@ -81,7 +81,7 @@ void MNIST::read_next() {
 	images_.read(buf_, DIM);
 	num_t inv = num_t{ 1.0 } / num_t{255.0};
 	for (size_t i = 0; i < DIM; ++i) {
-		data_[i] = num_t{ buf_[i] } *inv;
+		data_[i] = static_cast<uint8_t>(buf_[i]) * inv;
 	}
 
 	char label;
