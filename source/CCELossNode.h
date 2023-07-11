@@ -35,5 +35,20 @@ public:
 	void reset_score();
 
 private:
+	uint16_t input_size_;
+
+	//To make loss independet from batch size, we divide by batch size.
+	//And hence minimize the average loss instead of net losses,
+	//to help keep training paremeters constant across different batch sizes.
+	num_t inv_batch_size_;
+	num_t loss_;
 	num_t const* target_;
+	num_t* last_input_;
+	// Stores the last active classification in the target one-hot encoding
+	size_t active_;
+	num_t cumulative_loss_{ 0.0 };
+	// Stores the number of correct & incorrect classifications
+	size_t correct_ = 0;
+	size_t incorrect_ = 0;
+	std::vector<num_t> gradients_;
 };
