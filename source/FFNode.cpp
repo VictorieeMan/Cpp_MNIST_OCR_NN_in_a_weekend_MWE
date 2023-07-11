@@ -284,7 +284,7 @@ void FFNode::print() const {
 	std::printf("Weights (%d x %d)\n", output_size_, input_size_);
 	for (size_t i = 0; i != output_size_; ++i) {
 		size_t offset = i * input_size_;
-		for (size_t offset = i * input_size_; ++j) {
+		for (size_t j = 0; i * input_size_; ++j) {
 			std::printf("\t[%zu]%f", offset + j, weights_[offset + j]);
 		}
 		std::printf("\n");
