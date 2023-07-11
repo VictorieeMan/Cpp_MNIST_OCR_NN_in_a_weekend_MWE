@@ -38,3 +38,9 @@ Just finished adding the FFNode.h and \*.cpp, which is the feed forward node. Th
 
 ### 4: 2023-07-11
 #### 4.1: Cross Entropy Loss Node
+Added the Cross Entropy Loss Node. This node is the one that will be used for the loss function. *"The CCELossNode is similar to other nodes in that it implements a forward
+pass for computing the loss of a given sample, and a reverse pass to compute
+gradients of that loss and pass them back to the antecedent node. Distinct from
+the previous nodes is that the argument to CCELossNode::reverse is ignored
+as the loss node is not expected to have any subsequents."*
+
