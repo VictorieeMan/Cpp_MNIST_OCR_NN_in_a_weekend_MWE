@@ -10,6 +10,7 @@
 class CCELossNode : public Node {
 public:
 	CCELossNode(
+		Model& model,
 		std::string name,
 		uint16_t input_size,
 		size_t batch_size
