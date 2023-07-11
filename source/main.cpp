@@ -111,6 +111,37 @@ void train(char* argv[]) {
 	model.save(out);
 }
 
+void evaluate(char* argv[]) {
+	std::printf("Executing evaluation routine\n");
+
+	std::ifstream images{
+		std::filesystem::path{argv[0]} / "t10k-images-idx3-ubyte",
+		std::ios::binary
+	};
+
+	std::ifstream labels{
+		std::filesystem::path{argv[0]} / "t10k-labels-idx1-ubyte",
+		std::ios::binary
+	};
+
+	MNIST* mnist;
+	CCELossNode* loss;
+	// For the data to be loaded properly, the model must be constructed in the
+	// same manner as it was constructed during training.
+	Model model = create_model(images, labels, &mnist, &loss);
+
+	// Instead of initializing the parameters randomly, here we load it from
+	// disk (saved from a previous training run).
+	std::ifstream params_file{std::filesystem::path{argv[1]}, std::ios::binary};
+	model.load(params_file);
+
+	// Evaluate all 10000 images in the test set and compute the loss average
+	for (size_t i = 0; i != mnist->size(); ++i) {
+		mnist->forward();
+	}
+	loss->print();
+}
+
 int main(int argc, char* argv[]) {
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
 	
