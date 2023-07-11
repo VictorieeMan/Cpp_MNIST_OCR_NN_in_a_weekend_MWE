@@ -14,7 +14,8 @@
 #include <cstring>
 #include <filesystem>
 
-//using namespace std;
+//Hyperparameters
+static constexpr size_t batch_size = 100;
 
 int main(int argc, char* argv[]) {
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
