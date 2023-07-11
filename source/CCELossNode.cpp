@@ -84,3 +84,7 @@ void CCELossNode::forward(num_t* data) {
 	//Store the data pointer to compute gradients later
 	last_input_ = data;
 }
+
+void CCELossNode::print() const {
+	std::printf("Avg Loss: %f\t%f%% correct\n", avg_loss(), accuracy() * 100.0);
+}
