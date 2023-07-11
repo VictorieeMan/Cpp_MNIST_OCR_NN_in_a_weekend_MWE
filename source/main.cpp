@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <vector>
+#include <cfenv>
+#include <cstdio>
+#include <cstring>
+#include <filesystem>
 
 //using namespace std;
 
