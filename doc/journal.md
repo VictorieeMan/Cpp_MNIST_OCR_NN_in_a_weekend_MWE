@@ -48,4 +48,5 @@ as the loss node is not expected to have any subsequents."*
 #### 4.2: Putting things together
 Optimizer done, now starting to putting things together in main.cpp. Important do-do:
 	
- - [ ] In main.cpp void train(char* argv[]) function, test and fix filepaths.
+ - [x] In main.cpp void train(char* argv[]) function, test and fix filepaths.
+     - train(argv + 2) was forwarded, and this broke the argv[0] usage within the train funciton when it came to opening the files. Fixed by only forwarding argv. I'm considering to create a function that constructs the filepath and returns it to where it is needed.
