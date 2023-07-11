@@ -88,3 +88,9 @@ void CCELossNode::forward(num_t* data) {
 void CCELossNode::print() const {
 	std::printf("Avg Loss: %f\t%f%% correct\n", avg_loss(), accuracy() * 100.0);
 }
+
+
+num_t CCELossNode::accuracy() const {
+	return static_cast<num_t>(correct_)
+		/ static_cast<num_t>(correct_ + incorrect_);
+}
