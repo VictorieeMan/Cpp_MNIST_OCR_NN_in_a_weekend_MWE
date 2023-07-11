@@ -151,6 +151,7 @@ void evaluate(char* argv[], std::string image_path, std::string label_path) {
 }
 
 int main(int argc, char* argv[]) {
+	bool debug = true;
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
 	
 	// Creating a vector of arguments;
@@ -162,7 +163,7 @@ int main(int argc, char* argv[]) {
 	std::string label_path = MNIST_data_filepath(argv, "train-labels-idx1-ubyte");
 
 
-	if (argc != 2) {
+	if (argc != 2 && !debug) {
 		std::cout << "This program can be launched with arguments like this:" << std::endl;
 		std::cout << "Usage: " << argv[0] << " <mode>" << std::endl;
 		std::cout << "where <mode> is either \"train\" or \"eval\"" << std::endl;
@@ -173,6 +174,10 @@ int main(int argc, char* argv[]) {
 
 		// Adding to args vector
 		args.push_back(mode);
+	}
+	else if(argc != 2) {
+		//For debugging purposes, faster then typing in the command line
+		args.push_back("train");
 	}
 
 	// Dealing with user commands
