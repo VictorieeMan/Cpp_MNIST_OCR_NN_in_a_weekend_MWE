@@ -17,6 +17,15 @@
 //Hyperparameters
 static constexpr size_t batch_size = 100;
 
+std::string MNIST_data_filepath(char* argv[], std::string filename) {
+	// This function is used to find the path to the MNIST data files.
+	// This solution require the data files to be in the same folder as the executable,
+	// >> TO-DO: Make it so that the files can be read relative to the repository root folder instead.
+	std::string path = argv[0];
+	path = path.substr(0, path.find_last_of("\\/")+1);
+	return path + filename;
+}
+
 Model create_model(
 	std::ifstream& images,
 	std::ifstream& labels,
@@ -48,20 +57,19 @@ Model create_model(
 	return model;
 }
 
-void train(char* argv[]) {
+void train(char* argv[], std::string image_path, std::string label_path) {
 	// Uncomment to debug floating point instability in the network
 	// feenableexcept(FE_INVALID | FE_OVERFLOW);
 
 	std::printf("Executing training routine\n");
 	
-	//>>> TO DO: Test opening files, and fix the path to the data files. Probably needed.
 	std::ifstream images{
-		std::filesystem::path{argv[0]} / "train-images-idx3-ubyte",
+		image_path,
 		std::ios::binary
 	};
 
 	std::ifstream labels{
-		std::filesystem::path{argv[0]} / "train-labels-idx1-ubyte",
+		label_path,
 		std::ios::binary
 	};
 
@@ -111,16 +119,16 @@ void train(char* argv[]) {
 	model.save(out);
 }
 
-void evaluate(char* argv[]) {
+void evaluate(char* argv[], std::string image_path, std::string label_path) {
 	std::printf("Executing evaluation routine\n");
 
 	std::ifstream images{
-		std::filesystem::path{argv[0]} / "t10k-images-idx3-ubyte",
+		image_path,
 		std::ios::binary
 	};
 
 	std::ifstream labels{
-		std::filesystem::path{argv[0]} / "t10k-labels-idx1-ubyte",
+		label_path,
 		std::ios::binary
 	};
 
@@ -149,6 +157,11 @@ int main(int argc, char* argv[]) {
 	// to making switch between command line input and manual input easy
 	std::vector<std::string> args(argv, argv + argc);
 
+	//Creating filepaths to image & label files
+	std::string image_path = MNIST_data_filepath(argv, "train-images-idx3-ubyte");
+	std::string label_path = MNIST_data_filepath(argv, "train-labels-idx1-ubyte");
+
+
 	if (argc != 2) {
 		std::cout << "This program can be launched with arguments like this:" << std::endl;
 		std::cout << "Usage: " << argv[0] << " <mode>" << std::endl;
@@ -165,11 +178,11 @@ int main(int argc, char* argv[]) {
 	// Dealing with user commands
 	if (args[1] == "train") {
 		std::cout << "Training mode" << std::endl;
-		train(argv + 2);
+		train(argv, image_path, label_path);
 	}
 	else if (args[1] == "eval") {
 		std::cout << "Evaluation mode" << std::endl;
-		evaluate(argv + 2);
+		evaluate(argv, image_path, label_path);
 	}
 	else {
 		std::cout << "Unknown mode in input." << std::endl;

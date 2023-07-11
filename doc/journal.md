@@ -50,3 +50,24 @@ Optimizer done, now starting to putting things together in main.cpp. Important d
 	
  - [x] In main.cpp void train(char* argv[]) function, test and fix filepaths.
      - train(argv + 2) was forwarded, and this broke the argv[0] usage within the train funciton when it came to opening the files. Fixed by only forwarding argv. I'm considering to create a function that constructs the filepath and returns it to where it is needed.
+
+#### 4.3: Fixing the filepath problem
+I implemented a function that constructs a filepath. At the moment this solution require the files to be stored next to the executable, not the best solution since different compilers may create the \*.exe file in different locations. I will have to look into how to make it so that the files can be read relative to the repository root folder instead.
+
+But this works for now!
+```c++
+std::string MNIST_data_filepath(char* argv[], std::string filename) {
+	// This function is used to find the path to the MNIST data files.
+	// This solution require the data files to be in the same folder as the executable,
+	// >> TO-DO: Make it so that the files can be read relative to the repository root folder instead.
+	std::string path = argv[0];
+	path = path.substr(0, path.find_last_of("\\/")+1);
+	return path + filename;
+}
+```
+
+The neat thing with having implemented a funciton is that further solutions can be implemented centraly in this defention, and then used in the code where needed. This is a good example of the DRY principle.
+
+*"DRY stands for “Don’t Repeat Yourself”. It is a principle of software development that aims to reduce repetition and redundancy in code. The idea is to avoid writing the same code or logic multiple times, and instead, encapsulate it in a single place and reuse it as needed.
+
+The DRY principle can help make your code more maintainable, readable, and extensible."*
