@@ -104,7 +104,7 @@ void MNIST::print_last() {
 		}
 	}
 
-	for (size_t i = i; i != 28; ++i) {
+	for (size_t i = 0; i != 28; ++i) {
 		size_t offset = i * 28;
 		for (size_t j = 0; j != 28; ++j) {
 			if (data_[offset + j] > num_t{0.5}) {
