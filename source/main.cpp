@@ -1,6 +1,12 @@
 ﻿// main.cpp : Defines the entry point for the application.
 //
 
+#include "CCELossNode.h"
+#include "FFNode.h"
+#include "GDOptimizer.h"
+#include "MNIST.h"
+#include "model.h"
+
 #include <iostream>
 #include <vector>
 #include <cfenv>
