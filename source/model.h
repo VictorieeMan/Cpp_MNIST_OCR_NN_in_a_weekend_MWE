@@ -101,8 +101,9 @@ public:
 	template <typename Node_t, typename... T>
 	Node_t& add_node(T&&... args) {
 		nodes_.emplace_back(
-			std::make_unique<Node_t>(*this, std::forward<T>(args));
-		return reinterpret_cast<Node_t& (*nodes_.back());
+			std::make_unique<Node_t>(*this, std::forward<T>(args)...)
+		);
+		return reinterpret_cast<Node_t&>(*nodes_.back());
 	}
 
 	void create_edge(Node& dst, Node& src);
