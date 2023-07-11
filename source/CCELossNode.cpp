@@ -85,6 +85,23 @@ void CCELossNode::forward(num_t* data) {
 	last_input_ = data;
 }
 
+void CCELossNode::reverse(num_t* data) {
+	// dJ/dq_i = d(-\sum_i(p_i log(q_i)))/dq_i = -1 / q_j where j is the index
+	// of the correct classification (loss gradient for a single sample).
+	//
+	// Note the normalization factor where we multiply by the inverse batch
+	// size. This ensures that losses computed by the network are similar in
+	// scale irrespective of batch size.
+
+	for (size_t i = 0; i != input_size_; ++i) {
+		gradients_[i] = -inv_batch_size_ * target_[i] / last_input_[i];
+	}
+
+	for (Node* node : antecedents_) {
+		node->reverse(gradients_.data());
+	}
+}
+
 void CCELossNode::print() const {
 	std::printf("Avg Loss: %f\t%f%% correct\n", avg_loss(), accuracy() * 100.0);
 }
