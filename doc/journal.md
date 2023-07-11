@@ -44,3 +44,8 @@ gradients of that loss and pass them back to the antecedent node. Distinct from
 the previous nodes is that the argument to CCELossNode::reverse is ignored
 as the loss node is not expected to have any subsequents."*
 
+
+#### 4.2: Putting things together
+Optimizer done, now starting to putting things together in main.cpp. Important do-do:
+	
+ - [ ] In main.cpp void train(char* argv[]) function, test and fix filepaths.
