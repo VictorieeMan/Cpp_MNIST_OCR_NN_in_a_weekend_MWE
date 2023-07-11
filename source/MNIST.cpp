@@ -71,6 +71,12 @@ void MNIST::forward(num_t* data) {
 	}
 }
 
+void MNIST::reverse(num_t* data) {
+	//No learned parameters to reverse.
+	//For the input node there are no parameters to update.
+	//Do nothing...
+}
+
 void MNIST::print() const {
 	//No learned parameters to print.
 	//Due to being an input node.
