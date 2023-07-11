@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 	if (argc != 2) {
 		std::cout << "This program can be launched with arguments like this:" << std::endl;
 		std::cout << "Usage: " << argv[0] << " <mode>" << std::endl;
-		std::cout << "where <mode> is either \"train\" or \"test\"" << std::endl;
+		std::cout << "where <mode> is either \"train\" or \"eval\"" << std::endl;
 		std::cout << std::endl << "No arguments were provided. Manual mode selected." << std::endl;
 		std::cout << "Please enter the mode of operation: ";
 		char mode[10];
@@ -165,12 +165,14 @@ int main(int argc, char* argv[]) {
 	// Dealing with user commands
 	if (args[1] == "train") {
 		std::cout << "Training mode" << std::endl;
+		train(argv + 2);
 	}
-	else if (args[1] == "test") {
-		std::cout << "Testing mode" << std::endl;
+	else if (args[1] == "eval") {
+		std::cout << "Evaluation mode" << std::endl;
+		evaluate(argv + 2);
 	}
 	else {
-		std::cout << "Unknown mode" << std::endl;
+		std::cout << "Unknown mode in input." << std::endl;
 	}
 	return 0;
 }
