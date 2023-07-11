@@ -34,4 +34,7 @@ Now the MNIST input node is finished, the declaration of the class is in the MNI
 ## Week 28
 ### 3: 2023-07-10
 #### 3.1: Added the FFNode
-Just finished adding the FFNode.h and \*.cpp, which is the feed forward node. This node is the one that will be used for the hidden and output layers. It is a fully connected layer, and it's forward pass is a matrix multiplication. See the code for more details and comments.
+Just finished adding the FFNode.h and \*.cpp, which is the feed forward node. This node is the one that will be used for the hidden and output layers. It is a fully connected layer, and it's forward pass is a matrix multiplication. See the code for more details and comments. THis is where the action is!
+
+### 4: 2023-07-11
+#### 4.1: Cross Entropy Loss Node
