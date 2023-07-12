@@ -26,6 +26,16 @@ std::string MNIST_data_filepath(char* argv[], std::string filename) {
 	return path + filename;
 }
 
+std::ifstream open_file(std::string file_path) {
+	// This function is used to open the MNIST data files.
+	// It is used to open the files in binary mode.
+	std::ifstream file{ file_path, std::ios::binary };
+	if (!file) {
+		throw std::runtime_error{ "Could not open file " + file_path };
+	}
+	return file;
+}
+
 Model create_model(
 	std::ifstream& images,
 	std::ifstream& labels,
@@ -62,16 +72,9 @@ void train(char* argv[], std::string image_path, std::string label_path) {
 	// feenableexcept(FE_INVALID | FE_OVERFLOW);
 
 	std::printf("Executing training routine\n");
-	
-	std::ifstream images{
-		image_path,
-		std::ios::binary
-	};
 
-	std::ifstream labels{
-		label_path,
-		std::ios::binary
-	};
+	std::ifstream images = open_file(image_path);
+	std::ifstream labels = open_file(label_path);
 
 	MNIST* mnist;
 	CCELossNode* loss;
@@ -122,15 +125,8 @@ void train(char* argv[], std::string image_path, std::string label_path) {
 void evaluate(char* argv[], std::string image_path, std::string label_path) {
 	std::printf("Executing evaluation routine\n");
 
-	std::ifstream images{
-		image_path,
-		std::ios::binary
-	};
-
-	std::ifstream labels{
-		label_path,
-		std::ios::binary
-	};
+	std::ifstream images = open_file(image_path);
+	std::ifstream labels = open_file(label_path);
 
 	MNIST* mnist;
 	CCELossNode* loss;
@@ -152,6 +148,9 @@ void evaluate(char* argv[], std::string image_path, std::string label_path) {
 
 int main(int argc, char* argv[]) {
 	bool debug = true;
+	if (debug) {
+		std::cout << "Debug mode is on" << std::endl;
+	}
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
 	
 	// Creating a vector of arguments;
