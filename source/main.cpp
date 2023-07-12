@@ -150,6 +150,7 @@ int main(int argc, char* argv[]) {
 	bool debug = true;
 	if (debug) {
 		std::cout << "Debug mode is on" << std::endl;
+		std::cout << "Path: " << argv[0] << std::endl;
 	}
 	std::cout << "Hello user! Pick a mode of operation." << std::endl;
 	
