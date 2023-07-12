@@ -16,12 +16,6 @@ add_executable(main
     "GDOptimizer.cpp"
 )
 
-# Add data files to the project, form the MNIST_dataset folder
-file(GLOB_RECURSE DATA_FILES "MNIST_dataset/*")
-
-# Copy data files to build directory
-file(COPY ${DATA_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET main PROPERTY CXX_STANDARD 20)
 endif()

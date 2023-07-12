@@ -13,3 +13,4 @@ project ("my_first_cpp_NN_experiment")
 
 # Include sub-projects.
 add_subdirectory ("source")
+add_subdirectory ("MNIST_dataset")
