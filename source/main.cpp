@@ -23,6 +23,7 @@ std::string MNIST_data_filepath(char* argv[], std::string filename) {
 	// >> TO-DO: Make it so that the files can be read relative to the repository root folder instead.
 	std::string path = argv[0];
 	path = path.substr(0, path.find_last_of("\\/")+1);
+	path += "MNIST_dataset\\";
 	return path + filename;
 }
 
@@ -159,8 +160,8 @@ int main(int argc, char* argv[]) {
 	std::vector<std::string> args(argv, argv + argc);
 
 	//Creating filepaths to image & label files
-	std::string image_path = MNIST_data_filepath(argv, "train-images-idx3-ubyte");
-	std::string label_path = MNIST_data_filepath(argv, "train-labels-idx1-ubyte");
+	std::string image_path = MNIST_data_filepath(argv, "train-images.idx3-ubyte");
+	std::string label_path = MNIST_data_filepath(argv, "train-labels.idx1-ubyte");
 
 
 	if (argc != 2 && !debug) {
