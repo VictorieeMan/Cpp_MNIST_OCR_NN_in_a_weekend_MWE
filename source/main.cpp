@@ -54,6 +54,7 @@ Model create_model(
 	FFNode& output = model.add_node<FFNode>("output", Activation::Softmax, 10, 31);
 
 	*loss = &model.add_node<CCELossNode>("loss", 10, batch_size);
+	(*loss)->set_target((*mnist)->label());
 
 	// F.T.R. The structure of our computational graph is completely sequential.
 	// In fact, the fully connected node and loss node we've implemented here do
