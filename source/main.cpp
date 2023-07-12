@@ -17,14 +17,18 @@
 //Hyperparameters
 static constexpr size_t batch_size = 100;
 
+std::string filepath_generator(char* argv[], std::string folder, std::string filename) {
+	//This generates filepaths relative to the exe file.
+	std::string path = argv[0];
+	path = path.substr(0, path.find_last_of("\\/") + 1);
+	path += folder;
+		return path + filename;
+}
+
 std::string MNIST_data_filepath(char* argv[], std::string filename) {
 	// This function is used to find the path to the MNIST data files.
-	// This solution require the data files to be in the same folder as the executable,
-	// >> TO-DO: Make it so that the files can be read relative to the repository root folder instead.
-	std::string path = argv[0];
-	path = path.substr(0, path.find_last_of("\\/")+1);
-	path += "MNIST_dataset\\";
-	return path + filename;
+	std::string path = filepath_generator(argv, "MNIST_dataset\\", filename);
+	return path;
 }
 
 std::ifstream open_file(std::string file_path) {
@@ -124,7 +128,7 @@ void train(char* argv[], std::string image_path, std::string label_path) {
 	model.save(out);
 }
 
-void evaluate(char* argv[], std::string image_path, std::string label_path) {
+void evaluate(char* argv[], std::string image_path, std::string label_path, std::string params_file_path) {
 	std::printf("Executing evaluation routine\n");
 
 	std::ifstream images = open_file(image_path);
@@ -138,7 +142,7 @@ void evaluate(char* argv[], std::string image_path, std::string label_path) {
 
 	// Instead of initializing the parameters randomly, here we load it from
 	// disk (saved from a previous training run).
-	std::ifstream params_file{std::filesystem::path{argv[1]}, std::ios::binary};
+	std::ifstream params_file = open_file(params_file_path);
 	model.load(params_file);
 
 	// Evaluate all 10000 images in the test set and compute the loss average
@@ -150,6 +154,7 @@ void evaluate(char* argv[], std::string image_path, std::string label_path) {
 
 int main(int argc, char* argv[]) {
 	bool debug = true;
+	bool debug_train = false; //if true, debug eval
 	if (debug) {
 		std::cout << "Debug mode is on" << std::endl;
 		std::cout << "Path: " << argv[0] << std::endl;
@@ -163,6 +168,8 @@ int main(int argc, char* argv[]) {
 	//Creating filepaths to image & label files
 	std::string image_path = MNIST_data_filepath(argv, "train-images.idx3-ubyte");
 	std::string label_path = MNIST_data_filepath(argv, "train-labels.idx1-ubyte");
+	std::string model_name = "ff.params";
+	std::string params_file_path = filepath_generator(argv, "", model_name);
 
 
 	if (argc != 2 && !debug) {
@@ -178,8 +185,13 @@ int main(int argc, char* argv[]) {
 		args.push_back(mode);
 	}
 	else if(argc != 2) {
-		//For debugging purposes, faster then typing in the command line
-		args.push_back("train");
+		if (debug_train) {
+			//For debugging purposes, faster then typing in the command line
+			args.push_back("train");
+		}
+		else {
+			args.push_back("eval");
+		}
 	}
 
 	// Dealing with user commands
@@ -189,7 +201,7 @@ int main(int argc, char* argv[]) {
 	}
 	else if (args[1] == "eval") {
 		std::cout << "Evaluation mode" << std::endl;
-		evaluate(argv, image_path, label_path);
+		evaluate(argv, image_path, label_path, params_file_path);
 	}
 	else {
 		std::cout << "Unknown mode in input." << std::endl;
