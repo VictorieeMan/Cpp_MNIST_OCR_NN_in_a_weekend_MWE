@@ -10,11 +10,25 @@ As a personal exercise I have created this repository with the purpose of buildi
  - C++ compiler (e.g. g++), with C++11 support
  - CMake version 3.8 or higher
 
-### Build the project
+### Build the project (NEEDS MORE WORK!!!!)
 1. Clone the repository to your local machine
 2. Navigate to the root directory of the project
 3. Create a build directory: `mkdir build`
-4. Run Cmake: 'cmake ..'
+4. Run Cmake: 'cmake -S . -B build'
 5. Build the project
 
 After building the project, the executable `main` will be located in the `build` directory.
+
+Commands to prepare the program for building executable file:
+```
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git
+
+cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\
+
+cmake -S . -B build
+```
+
+Then run whatever build command you prefer, depending on your OS and compiler. For example, on Windows with MinGW:
+```
+cmake --build build --config Release
+```
