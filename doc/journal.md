@@ -77,4 +77,4 @@ There was some CMAKE magic needed to get the program to compile and run correctl
 
 ### 5: 2023-07-15
 #### 5.1: Minimal working example
-It seems like I have gotten this project to work. My original idea was to add on more features directly in this repository but I have decided to fork it, and keep this as a minimal workign example. This way there is a clear place to start from if other variations is to be made. I will rename this repository from my_first_cpp_NN_experiment to cpp_NN_in_a_weekend_minimal_working_example.
+It seems like I have gotten this project to work. My original idea was to add on more features directly in this repository but I have decided to fork it, and keep this as a minimal workign example. This way there is a clear place to start from if other variations is to be made. I will rename this repository from my_first_cpp_NN_experiment to Cpp_MNIST_OCR_NN_in_a_weekend__MWE, where MWE stands for minimal working example.
