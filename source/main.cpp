@@ -153,7 +153,7 @@ void evaluate(char* argv[], std::string image_path, std::string label_path, std:
 }
 
 int main(int argc, char* argv[]) {
-	bool debug = true;
+	bool debug = false;
 	bool debug_train = false; //if true, debug eval
 	if (debug) {
 		std::cout << "Debug mode is on" << std::endl;
@@ -205,6 +205,11 @@ int main(int argc, char* argv[]) {
 	}
 	else {
 		std::cout << "Unknown mode in input." << std::endl;
+	}
+	if (debug == false) {
+		// To keep the window open until keys are pressed.
+		int dummy = 0;
+		std::cin >> dummy;
 	}
 	return 0;
 }
