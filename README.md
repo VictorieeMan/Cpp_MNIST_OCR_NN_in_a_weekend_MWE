@@ -7,5 +7,14 @@ As a personal exercise I have created this repository with the purpose of buildi
 
 ## How to compile and run
 ### Prerequisites
+ - C++ compiler (e.g. g++), with C++11 support
+ - CMake version 3.8 or higher
 
 ### Build the project
+1. Clone the repository to your local machine
+2. Navigate to the root directory of the project
+3. Create a build directory: `mkdir build`
+4. Run Cmake: 'cmake ..'
+5. Build the project
+
+After building the project, the executable `main` will be located in the `build` directory.
