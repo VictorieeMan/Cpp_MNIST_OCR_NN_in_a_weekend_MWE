@@ -68,6 +68,13 @@ std::string MNIST_data_filepath(char* argv[], std::string filename) {
 
 The neat thing with having implemented a funciton is that further solutions can be implemented centraly in this defention, and then used in the code where needed. This is a good example of the DRY principle.
 
-*"DRY stands for “Don’t Repeat Yourself”. It is a principle of software development that aims to reduce repetition and redundancy in code. The idea is to avoid writing the same code or logic multiple times, and instead, encapsulate it in a single place and reuse it as needed.
+*"DRY stands for ï¿½Donï¿½t Repeat Yourselfï¿½. It is a principle of software development that aims to reduce repetition and redundancy in code. The idea is to avoid writing the same code or logic multiple times, and instead, encapsulate it in a single place and reuse it as needed.
 
 The DRY principle can help make your code more maintainable, readable, and extensible."*
+
+#### 4.4: CMAKE fixes
+There was some CMAKE magic needed to get the program to compile and run correctly. Using CMAKE is pure magic, it can help copying files etc. It really is worth looking into some basics. As a beginner I find CMAKE to work veryh well together with github copilot, just promot with comments and get CMAKE commands generated on the spot. Works well with minimal debugging. The CMAKE files contained within this project covers lots of basic functionality, and it is worthy of looking over these again for later study.
+
+### 5: 2023-07-15
+#### 5.1: Minimal working example
+It seems like I have gotten this project to work. My original idea was to add on more features directly in this repository but I have decided to fork it, and keep this as a minimal workign example. This way there is a clear place to start from if other variations is to be made. I will rename this repository from my_first_cpp_NN_experiment to cpp_NN_in_a_weekend_minimal_working_example.
