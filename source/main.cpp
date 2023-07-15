@@ -206,6 +206,9 @@ int main(int argc, char* argv[]) {
 	else {
 		std::cout << "Unknown mode in input." << std::endl;
 	}
+
+	std::cout << "Program finished." << std::endl;
+
 	if (debug == false) {
 		// To keep the window open until keys are pressed.
 		int dummy = 0;
