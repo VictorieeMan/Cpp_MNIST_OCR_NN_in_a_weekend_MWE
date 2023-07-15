@@ -28,6 +28,7 @@ cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\
 cmake -S . -B build
 ```
 
+THIS COMMAND IS BROKEN:
 Then run whatever build command you prefer, depending on your OS and compiler. For example, on Windows with MinGW:
 ```
 cmake --build build --config Release
