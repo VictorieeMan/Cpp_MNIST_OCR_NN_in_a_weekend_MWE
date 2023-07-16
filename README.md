@@ -18,9 +18,14 @@ Easiest way to build is by using Visual Studio. Just git clone this repo, and op
 
 Super commands for building the project using CMake:
 
-Windows:
+Windows CMD:
 ```
 git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\ && cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ && cmake --build build
+```
+
+Windows PowerShell:
+```
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git; cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\; cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; cmake --build build; cd build; main.exe
 ```
 
 UNIX:
