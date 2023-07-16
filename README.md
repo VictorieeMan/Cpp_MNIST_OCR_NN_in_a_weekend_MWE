@@ -7,33 +7,60 @@ As a personal exercise I have created this repository with the purpose of buildi
 
 ## How to compile and run
 ### Prerequisites
- - C++ compiler (e.g. g++), with C++11 support
+ - C++ compiler (e.g. g++ or Clang), with C++11 support
  - CMake version 3.8 or higher
 
 ### Build the project
 ```
 git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git
 ```
-Easiest way to build is by using Visual Studio. The project is however configured to use CMake as a build system, so it should be possible to build the project using any CMake compatible build system.
+Easiest way to build is by using Visual Studio. Just git clone this repo, and open the root folder with Visual Studio, then build and compile. This project is however configured with **CMake** files, that can be used to build & compile the project without Visual Studio. See below for instructions.
 
-**Experimental CMAKE instructions for non Visual Studio users: (not working yet)**
-1. Clone the repository to your local machine
-2. Navigate to the root directory of the project
-3. Create a build directory: `mkdir build`
-4. Run Cmake: 'cmake -S . -B build'
-5. Build the project
+Super commands for building the project using CMake:
 
-After building the project, the executable `main` will be located in the `build` directory.
+Windows:
+```
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\ && cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ && cmake --build build
+```
 
-Commands to prepare the program for building executable file:
+UNIX:
+```	
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd Cpp_MNIST_OCR_NN_in_a_weekend__MWE/ && cmake --preset=unix-debug -B build -G "Unix Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ && cmake --build build && cd build && main.exe
+```
+**NOTE:** For customization of the command, -B is the build directory, -G is the generator, -DCMAKE_C_COMPILER and -DCMAKE_CXX_COMPILER are the compilers to use. You may alter these variables if the presets above doesn't match with your system.
+
+#### Super commands explained
+```
+git clone 
+```
+Clones the repository to your local machine.
+
 ```
 cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\
+```
+Changes directory to the root folder of the project.
 
-cmake -S . -B build
 ```
+//Windows version
+cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
-THIS COMMAND IS BROKEN:
-Then run whatever build command you prefer, depending on your OS and compiler. For example, on Windows with MinGW:
+//UNIX version
+cmake --preset=unix-debug -B build -G "Unix Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 ```
-cmake --build build --config Release
+Creates a build directory called "build" and generates the build files using the Ninja generator. The compiler is set to Clang and Clang++, alter these variables if the presets above doesn't match with your system.
+
 ```
+cmake --build build
+```
+Builds the project using the build files generated in the previous step.
+
+```
+cd build
+```
+Changes directory to the build directory.
+
+```
+main.exe
+```
+Runs the program.
+
