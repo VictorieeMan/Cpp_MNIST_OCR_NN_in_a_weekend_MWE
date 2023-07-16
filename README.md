@@ -25,7 +25,7 @@ git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git
 
 Windows PowerShell:
 ```
-git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git; cd ./Cpp_MNIST_OCR_NN_in_a_weekend__MWE/; cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; cmake --build build; cd build; ./main.exe
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git; cd ./Cpp_MNIST_OCR_NN_in_a_weekend__MWE/; cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; cmake --build build; cd build; ./main
 ```
 
 UNIX:
