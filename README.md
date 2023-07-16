@@ -10,7 +10,10 @@ As a personal exercise I have created this repository with the purpose of buildi
  - C++ compiler (e.g. g++), with C++11 support
  - CMake version 3.8 or higher
 
-### Build the project (NEEDS MORE WORK!!!!)
+### Build the project
+Easiest way to build is by using Visual Studio. The project is however configured to use CMake as a build system, so it should be possible to build the project using any CMake compatible build system.
+
+**Experimental CMAKE instructions for non Visual Studio users: (not working yet)**
 1. Clone the repository to your local machine
 2. Navigate to the root directory of the project
 3. Create a build directory: `mkdir build`
