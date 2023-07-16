@@ -32,13 +32,15 @@ void CCELossNode::forward(num_t* data) {
 	//In information theory, by convention, lim_{x approaches 0}(x log(x)) = 0.
 
 	num_t max{ 0.0 };
-	size_t max_index = 0;
+	size_t max_index;
+	bool max_idx_set{ false };
 
 	loss_ = num_t{ 0.0 };
 	for (size_t i = 0; i != input_size_; ++i) {
 		if (data[i] > max) {
 			max_index = i;
 			max = data[i];
+			max_idx_set = true;
 		}
 
 		// Because the target vector is one-hot encoded, most of these terms
@@ -71,7 +73,7 @@ void CCELossNode::forward(num_t* data) {
 	}
 
 	//Accounting
-	if (max_index == active_) {
+	if (max_idx_set && max_index == active_) {
 		++correct_;
 	}
 	else {
