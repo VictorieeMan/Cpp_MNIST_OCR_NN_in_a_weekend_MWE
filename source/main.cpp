@@ -149,6 +149,7 @@ void evaluate(char* argv[], std::string image_path, std::string label_path, std:
 	for (size_t i = 0; i != mnist->size(); ++i) {
 		mnist->forward();
 	}
+	mnist->print_last();
 	loss->print();
 }
 
