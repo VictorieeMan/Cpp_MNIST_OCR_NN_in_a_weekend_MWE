@@ -11,6 +11,9 @@ As a personal exercise I have created this repository with the purpose of buildi
  - CMake version 3.8 or higher
 
 ### Build the project
+```
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git
+```
 Easiest way to build is by using Visual Studio. The project is however configured to use CMake as a build system, so it should be possible to build the project using any CMake compatible build system.
 
 **Experimental CMAKE instructions for non Visual Studio users: (not working yet)**
@@ -24,8 +27,6 @@ After building the project, the executable `main` will be located in the `build`
 
 Commands to prepare the program for building executable file:
 ```
-git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git
-
 cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\
 
 cmake -S . -B build
