@@ -22,7 +22,7 @@ endif()
 
 # Set the output folder where your program will be created
 set_target_properties(main PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/.."
 )
 
 # Add source to this project's executable.
