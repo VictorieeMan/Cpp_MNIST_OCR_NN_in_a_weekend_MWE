@@ -32,7 +32,7 @@ void CCELossNode::forward(num_t* data) {
 	//In information theory, by convention, lim_{x approaches 0}(x log(x)) = 0.
 
 	num_t max{ 0.0 };
-	size_t max_index;
+	size_t max_index = 0;
 
 	loss_ = num_t{ 0.0 };
 	for (size_t i = 0; i != input_size_; ++i) {

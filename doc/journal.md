@@ -78,3 +78,11 @@ There was some CMAKE magic needed to get the program to compile and run correctl
 ### 5: 2023-07-15
 #### 5.1: Minimal working example
 It seems like I have gotten this project to work. My original idea was to add on more features directly in this repository but I have decided to fork it, and keep this as a minimal workign example. This way there is a clear place to start from if other variations is to be made. I will rename this repository from my_first_cpp_NN_experiment to Cpp_MNIST_OCR_NN_in_a_weekend__MWE, where MWE stands for minimal working example.
+
+### 6: 2023-07-16
+#### 6.1 initialize max_index to 0
+
+File concerned: CCELossNode.cpp
+size_t max_index = 0;
+
+I don't like having the value uninitialized. Might cause a problem, but I don't think it will. Further investigation must be done, I'll add this to the journal as well.
