@@ -20,17 +20,17 @@ Super commands for building the project using CMake:
 
 Windows CMD:
 ```
-git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\ && cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ && cmake --build build
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd ./Cpp_MNIST_OCR_NN_in_a_weekend__MWE/ && cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ && cmake --build build && ./main.exe
 ```
 
 Windows PowerShell:
 ```
-git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git; cd .\Cpp_MNIST_OCR_NN_in_a_weekend__MWE\; cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; cmake --build build; cd build; main.exe
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git; cd ./Cpp_MNIST_OCR_NN_in_a_weekend__MWE/; cmake --preset=x64-debug -B build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; cmake --build build; cd build; ./main.exe
 ```
 
 UNIX:
 ```	
-git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd Cpp_MNIST_OCR_NN_in_a_weekend__MWE/ && cmake --preset=unix-debug -B build -G "Unix Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ && cmake --build build && cd build && main.exe
+git clone https://github.com/VictorieeMan/Cpp_MNIST_OCR_NN_in_a_weekend__MWE.git && cd Cpp_MNIST_OCR_NN_in_a_weekend__MWE/ && cmake --preset=unix-debug -B build -G "Unix Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ && cmake --build build && cd build && ./main.exe
 ```
 **NOTE:** For customization of the command, -B is the build directory, -G is the generator, -DCMAKE_C_COMPILER and -DCMAKE_CXX_COMPILER are the compilers to use. You may alter these variables if the presets above doesn't match with your system.
 
