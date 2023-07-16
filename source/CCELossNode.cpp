@@ -73,6 +73,7 @@ void CCELossNode::forward(num_t* data) {
 	}
 
 	//Accounting
+	//First, check if the max index is set. To safeguard against NaNs.
 	if (max_idx_set && max_index == active_) {
 		++correct_;
 	}
