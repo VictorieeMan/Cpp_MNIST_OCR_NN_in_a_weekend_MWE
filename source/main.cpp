@@ -27,8 +27,12 @@ std::string filepath_generator(char* argv[], std::string folder, std::string fil
 
 std::string MNIST_data_filepath(char* argv[], std::string filename) {
 	// This function is used to find the path to the MNIST data files.
-	std::string path = filepath_generator(argv, "MNIST_dataset\\", filename);
-	return path;
+#if defined(WIN32) || defined(_WIN32) 
+  std::string folder = "MNIST_dataset\\";
+#else
+  std::string folder = "MNIST_dataset/";
+#endif
+	return filepath_generator(argv, folder, filename);
 }
 
 std::ifstream open_file(std::string file_path) {
