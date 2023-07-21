@@ -239,7 +239,7 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "Program finished." << std::endl;
 
-	if (debug == false) {
+	if (debug == true) {
 		// To keep the window open until keys are pressed.
 		int dummy = 0;
 		std::cin >> dummy;
