@@ -229,6 +229,7 @@ int main(int argc, char* argv[]) {
 		}
 		else {
 			++loops;
+			std::cout << std::endl << std::endl;
 			if (loops > 1000) {
 				std::cout << "Infinite loop detected. Exiting." << std::endl;
 				break;
