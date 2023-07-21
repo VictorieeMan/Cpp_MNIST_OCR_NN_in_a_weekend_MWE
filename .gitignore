@@ -1,6 +1,5 @@
 ## Project specific ignores
 *.params # Ignore parameters file
-CMakePresets.json # Ignore cmake presets file
 
 ## C++
 # Prerequisites

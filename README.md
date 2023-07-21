@@ -9,6 +9,7 @@ As a personal exercise I have created this repository with the purpose of buildi
 ### Prerequisites
  - C++ compiler (e.g. g++ or Clang), with C++11 support
  - CMake version 3.8 or higher
+ - Ninja build system (for CMake)
 
 ### Build the project
 ```
