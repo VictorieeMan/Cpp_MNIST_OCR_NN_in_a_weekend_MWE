@@ -44,6 +44,9 @@ void GDOptimizer::train(Node& node) {
       gradient[i] *= l2_norm;
     }
   }
+  /*Gradient clipping is a method where the error derivative is changed or
+  clipped to a threshold during backward propagation through the network,
+  and using the clipped gradients to update the weights*/
 
   // Update parameters using the gradient and learning rate eta.
 	size_t param_count = node.param_count();
