@@ -164,52 +164,76 @@ int main(int argc, char* argv[]) {
 		std::cout << "Debug mode is on" << std::endl;
 		std::cout << "Path: " << argv[0] << std::endl;
 	}
-	std::cout << "Hello user! Pick a mode of operation." << std::endl;
-	
-	// Creating a vector of arguments;
-	// to making switch between command line input and manual input easy
-	std::vector<std::string> args(argv, argv + argc);
+	std::cout << "Hello user!";
 
-	//Creating filepaths to image & label files
-	std::string image_path = MNIST_data_filepath(argv, "train-images.idx3-ubyte");
-	std::string label_path = MNIST_data_filepath(argv, "train-labels.idx1-ubyte");
-	std::string model_name = "ff.params";
-	std::string params_file_path = filepath_generator(argv, "", model_name);
+	int loops = 0; //In case of bug, block infty loop
+	while (true) {
+		std::cout << "Pick a mode of operation." << std::endl;
+
+		// Creating a vector of arguments;
+		// to making switch between command line input and manual input easy
+		std::vector<std::string> args(argv, argv + argc);
+
+		//Creating filepaths to image & label files
+		std::string image_path = MNIST_data_filepath(argv, "train-images.idx3-ubyte");
+		std::string label_path = MNIST_data_filepath(argv, "train-labels.idx1-ubyte");
+		std::string model_name = "ff.params";
+		std::string params_file_path = filepath_generator(argv, "", model_name);
 
 
-	if (argc != 2 && !debug) {
-		std::cout << "This program can be launched with arguments like this:" << std::endl;
-		std::cout << "Usage: " << argv[0] << " <mode>" << std::endl;
-		std::cout << "where <mode> is either \"train\" or \"eval\"" << std::endl;
-		std::cout << std::endl << "No arguments were provided. Manual mode selected." << std::endl;
-		std::cout << "Please enter the mode of operation: ";
-		char mode[10];
-		std::cin >> mode;
+		if (argc != 2 && !debug) {
+			std::cout << "This program can be launched with arguments like this:" << std::endl;
+			std::cout << "Usage: " << argv[0] << " <mode>" << std::endl;
+			std::cout << "where <mode> is either \"train\" or \"eval\"" << std::endl;
+			std::cout << std::endl << "No arguments were provided. Manual mode selected." << std::endl;
+			std::cout << "Enter q to quit." << std::endl;
+			std::cout << "Please enter the mode of operation: ";
+			char mode[10];
+			std::cin >> mode;
+			std::cout << std::endl;
 
-		// Adding to args vector
-		args.push_back(mode);
-	}
-	else if(argc != 2) {
-		if (debug_train) {
-			//For debugging purposes, faster then typing in the command line
-			args.push_back("train");
+			if (mode[0] == 'q') {
+				std::cout << "Exiting program." << std::endl;
+				break;
+			}
+
+			// Adding to args vector
+			args.push_back(mode);
+		}
+		else if (argc != 2) {
+			if (debug_train) {
+				//For debugging purposes, faster then typing in the command line
+				args.push_back("train");
+			}
+			else {
+				args.push_back("eval");
+			}
+		}
+
+		// Dealing with user commands
+		if (args[1] == "train") {
+			std::cout << "Training mode" << std::endl;
+			train(argv, image_path, label_path);
+		}
+		else if (args[1] == "eval") {
+			std::cout << "Evaluation mode" << std::endl;
+			evaluate(argv, image_path, label_path, params_file_path);
 		}
 		else {
-			args.push_back("eval");
+			std::cout << "Unknown mode in input." << std::endl;
 		}
-	}
 
-	// Dealing with user commands
-	if (args[1] == "train") {
-		std::cout << "Training mode" << std::endl;
-		train(argv, image_path, label_path);
-	}
-	else if (args[1] == "eval") {
-		std::cout << "Evaluation mode" << std::endl;
-		evaluate(argv, image_path, label_path, params_file_path);
-	}
-	else {
-		std::cout << "Unknown mode in input." << std::endl;
+		if (argc > 1) {
+			//Don't loop on cli input
+			break;
+		}
+		else {
+			++loops;
+			if (loops > 1000) {
+				std::cout << "Infinite loop detected. Exiting." << std::endl;
+				break;
+			}
+		}
 	}
 
 	std::cout << "Program finished." << std::endl;
@@ -219,5 +243,6 @@ int main(int argc, char* argv[]) {
 		int dummy = 0;
 		std::cin >> dummy;
 	}
+
 	return 0;
 }
